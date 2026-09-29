@@ -236,9 +236,6 @@ local function handleFullBag()
     local myRole = getRole(LocalPlayer)
     if not Config.ResetWhenBagFull then
         notify("Bag full. Waiting for next round.")
-    elseif myRole == "Murderer" or myRole == "Sheriff" then
-        -- Dying as Murderer ends the round and as Sheriff drops the gun: both affect everyone else.
-        notify("Bag full. Not resetting: you are " .. myRole .. ".")
     else
         notify("Bag full. Resetting.")
         local humanoid = getHumanoid()
