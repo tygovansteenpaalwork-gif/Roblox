@@ -25,14 +25,27 @@ With the default settings:
 loadstring(game:HttpGet("https://raw.githubusercontent.com/tygovansteenpaalwork-gif/Roblox/main/Games/MurderMystery2/CoinFarm.lua"))()
 ```
 
-With your own settings: set `CoinFarmConfig` before the loader. You only need to include the
-settings you want to change; everything else keeps its default.
+With your own settings: copy this, change the values you want, and run it. The values below are
+the defaults. Settings you remove keep their default.
 
 ```lua
 getgenv().CoinFarmConfig = {
-    TweenSpeed = 20,
-    MurdererSafeDistance = 60,
+    -- Studs per second while tweening to a coin. Walking is 16; much higher gets flagged more easily.
+    TweenSpeed = 25,
+    -- Coins further than this are skipped so we never cross the whole map in one go.
+    MaxCoinDistance = 300,
+    -- Pause after reaching a coin so the touch registers.
+    DelayAfterCoin = 0.15,
+    -- A coin that still is not collected after this many visits gets skipped for the rest of the round.
+    MaxAttemptsPerCoin = 2,
+    -- How often to check for a new round while waiting.
+    IdleCheckInterval = 1,
+    -- Reset when the bag is full, so you are out of the round instead of standing around.
     ResetWhenBagFull = true,
+    -- Skip coins near the Murderer and abort a tween when they get close.
+    AvoidMurderer = true,
+    MurdererSafeDistance = 40,
+    ShowNotifications = true,
 }
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/tygovansteenpaalwork-gif/Roblox/main/Games/MurderMystery2/CoinFarm.lua"))()
