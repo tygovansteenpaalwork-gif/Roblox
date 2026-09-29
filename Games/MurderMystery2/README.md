@@ -19,9 +19,27 @@ interact with other players, weapons, or the round itself.
 
 ## Usage
 
+With the default settings:
+
 ```lua
 loadstring(game:HttpGet("https://raw.githubusercontent.com/tygovansteenpaalwork-gif/Roblox/main/Games/MurderMystery2/CoinFarm.lua"))()
 ```
+
+With your own settings: set `CoinFarmConfig` before the loader. You only need to include the
+settings you want to change; everything else keeps its default.
+
+```lua
+getgenv().CoinFarmConfig = {
+    TweenSpeed = 20,
+    MurdererSafeDistance = 60,
+    ResetWhenBagFull = true,
+}
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/tygovansteenpaalwork-gif/Roblox/main/Games/MurderMystery2/CoinFarm.lua"))()
+```
+
+Unknown settings, wrong types, and negative numbers are ignored with a warning, and the default
+is used instead.
 
 Stop it:
 
@@ -33,7 +51,7 @@ Running the script again stops the previous instance first.
 
 ## Configuration
 
-All settings are in the `Config` table at the top of the script. They can also be changed while
+Set these in `getgenv().CoinFarmConfig` before loading (see above). They can also be changed while
 the script is running, for example `getgenv().CoinFarm.Config.TweenSpeed = 20`.
 
 | Setting | Default | Description |

@@ -24,6 +24,9 @@ Every script can be loaded straight from this repository:
 loadstring(game:HttpGet("https://raw.githubusercontent.com/tygovansteenpaalwork-gif/Roblox/main/<folder>/<script>.lua"))()
 ```
 
+Scripts with settings read them from `getgenv()` before loading. See the README in each script's
+folder for the exact settings.
+
 ## Disclaimer
 
 Using third-party scripts breaks the Roblox Terms of Use and the rules of most games.

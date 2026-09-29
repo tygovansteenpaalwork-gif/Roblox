@@ -1,4 +1,5 @@
 -- MM2 coin farm: only moves your own character to coins. Starts on its own.
+-- Override settings by setting getgenv().CoinFarmConfig = { TweenSpeed = 20, ... } before loading.
 -- Stop it with: getgenv().CoinFarm.stop()
 
 local Config = {
@@ -19,6 +20,22 @@ local Config = {
     MurdererSafeDistance = 40,
     ShowNotifications = true,
 }
+
+-- Only known settings with the right type are taken over, so a typo cannot break the farm.
+local userConfig = getgenv().CoinFarmConfig
+if type(userConfig) == "table" then
+    for key, value in pairs(userConfig) do
+        if Config[key] == nil then
+            warn(string.format("[CoinFarm] Unknown setting ignored: %s", tostring(key)))
+        elseif type(value) ~= type(Config[key]) then
+            warn(string.format("[CoinFarm] Setting %s must be a %s, got %s", key, type(Config[key]), type(value)))
+        elseif type(value) == "number" and (value < 0 or (key == "TweenSpeed" and value == 0)) then
+            warn(string.format("[CoinFarm] Setting %s has an invalid value: %s", key, tostring(value)))
+        else
+            Config[key] = value
+        end
+    end
+end
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
